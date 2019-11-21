@@ -1,0 +1,20 @@
+
+#specify the bands with nodata
+gdal_translate -a_nodata "0 0 0 0" img_mod.tif img_mod_nodata.tif
+
+
+gdal_translate -a_nodata "0 0 0 0" upper-0043.tif upper-0043_nodata.tif
+
+
+
+#cut area geojson from tif image
+gdalwarp -of GTiff -cutline lower_c.geojson -crop_to_cutline med-area.tif results/lower_c.tif
+
+gdalwarp -of GTiff -cutline middle_c.geojson -crop_to_cutline med-area.tif results/middle_c.tif
+
+
+
+
+
+#combine two tif images
+gdalwarp area_honda_small.tif img_mod_nodata.tif area_honda_small_mod.tif
